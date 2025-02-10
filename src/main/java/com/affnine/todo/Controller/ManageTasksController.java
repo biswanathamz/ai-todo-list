@@ -2,6 +2,8 @@ package com.affnine.todo.Controller;
 
 import com.affnine.todo.Controller.Route.ManageTasksRoute;
 import com.affnine.todo.Model.Request.CreateNewTaskRequest;
+import com.affnine.todo.Model.Request.UpdateTaskRequest;
+import com.affnine.todo.Model.Response.GetTaskResponseDto;
 import com.affnine.todo.Service.TaskService;
 import com.affnine.todo.Util.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,13 @@ public class ManageTasksController implements ManageTasksRoute {
     }
 
     @Override
-    public ResponseEntity<ServiceResponse<String>> taskUpdate(CreateNewTaskRequest request) {
-        return null;
+    public ResponseEntity<ServiceResponse<String>> taskUpdate(Long taskId, UpdateTaskRequest request) {
+        return taskService.updateTask(taskId, request);
     }
+
+    @Override
+    public ResponseEntity<ServiceResponse<GetTaskResponseDto>> showTask(Long taskId) {
+        return taskService.showTask(taskId);
+    }
+
 }
