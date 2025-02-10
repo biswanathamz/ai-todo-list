@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: classpath:db/changelog/001-create-task-category.yaml
+  - include:
+      file: classpath:db/changelog/002-insert-task-category.yaml
+  - include:
+     file: classpath:db/changelog/003-create-user-table.yaml
+  - include:
+     file: classpath:db/changelog/004-create-tasks-table.yaml
+  - include:
+      file: classpath:db/changelog/005-update-tasks-table.yaml

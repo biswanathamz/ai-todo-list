@@ -1,0 +1,82 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002
+      author: Biswanath_Saha
+      changes:
+        - insert:
+            tableName: task_category
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: "Work"
+              - column:
+                  name: description
+                  value: "Tasks related to work and office"
+
+        - insert:
+            tableName: task_category
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: "Personal"
+              - column:
+                  name: description
+                  value: "Personal tasks and self-care"
+
+        - insert:
+            tableName: task_category
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: "Shopping"
+              - column:
+                  name: description
+                  value: "Grocery and other shopping tasks"
+
+        - insert:
+            tableName: task_category
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: "Fitness"
+              - column:
+                  name: description
+                  value: "Health and exercise-related tasks"
+
+        - insert:
+            tableName: task_category
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: "Finance"
+              - column:
+                  name: description
+                  value: "Financial and bill-related tasks"
+
+        - insert:
+            tableName: task_category
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: name
+                  value: "Startup"
+              - column:
+                  name: description
+                  value: "Own Startup related tasks"
