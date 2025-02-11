@@ -95,6 +95,7 @@ public class TaskServiceImpl implements TaskService {
         try{
             // Fetch the UserId
             long userId = 1;
+
             Task task = taskRepository.findById(taskId)
                     .orElseThrow(() -> new EntityNotFoundException("Task not found with ID: " + taskId));
 
@@ -129,8 +130,16 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public ResponseEntity<ServiceResponse<GetTaskResponseDto>> showTask(Long taskId) {
         try {
+            // Fetch the UserId
+            long userId = 1;
+
             Task task = taskRepository.findById(taskId)
                     .orElseThrow(() -> new EntityNotFoundException("Task not found with ID: " + taskId));
+
+            if(!task.getUser().getId().equals(userId)){
+                return ResponseUtils.badRequest(AppConstants.UNAUTHORIZED_GET_TASK_DETAILS_MESSAGE, null);
+            }
+
             GetTaskResponseDto getTaskResponseDto = new GetTaskResponseDto();
             getTaskResponseDto.setTaskName(task.getName());
             getTaskResponseDto.setTaskDescription(task.getDescription());
