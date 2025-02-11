@@ -17,6 +17,7 @@ import com.affnine.todo.Util.CommonUtils;
 import com.affnine.todo.Util.ResponseUtils;
 import com.affnine.todo.Util.ServiceResponse;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -92,8 +93,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public ResponseEntity<ServiceResponse<String>> updateTask(Long taskId, UpdateTaskRequest request) {
         try{
+            // Fetch the UserId
+            long userId = 1;
             Task task = taskRepository.findById(taskId)
                     .orElseThrow(() -> new EntityNotFoundException("Task not found with ID: " + taskId));
+
+            if(!task.getUser().getId().equals(userId)){
+                return ResponseUtils.badRequest(AppConstants.UNAUTHORIZED_UPDATED_TASK_MESSAGE, null);
+            }
 
             if (request.getTaskName() != null) {
                 task.setName(request.getTaskName());
