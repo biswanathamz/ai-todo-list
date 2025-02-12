@@ -3,6 +3,7 @@ package com.affnine.todo.Service;
 import com.affnine.todo.Model.Request.CreateNewTaskRequest;
 import com.affnine.todo.Model.Request.UpdateTaskRequest;
 import com.affnine.todo.Model.Response.GetAllStatusResponseDto;
+import com.affnine.todo.Model.Response.GetAllTaskResponseDto;
 import com.affnine.todo.Model.Response.GetTaskResponseDto;
 import com.affnine.todo.Util.ServiceResponse;
 import org.springframework.http.ResponseEntity;
@@ -14,4 +15,5 @@ public interface TaskService {
     ResponseEntity<ServiceResponse<String>> createTask(CreateNewTaskRequest request);
     ResponseEntity<ServiceResponse<String>> updateTask(Long taskId, UpdateTaskRequest request);
     ResponseEntity<ServiceResponse<GetTaskResponseDto>> showTask(Long taskId);
+    ResponseEntity<ServiceResponse<List<GetAllTaskResponseDto>>> showAllTasks(Long userId);
 }

@@ -1,5 +1,6 @@
 package com.affnine.todo.Controller;
 
+import com.affnine.todo.Controller.Route.TaskCategoryRoute;
 import com.affnine.todo.Model.Response.GetAllCategoriesResponseDTO;
 import com.affnine.todo.Service.TaskCategoryService;
 import com.affnine.todo.Util.ServiceResponse;
@@ -12,13 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/categories")
-public class TaskCategoryController {
+public class TaskCategoryController implements TaskCategoryRoute {
 
     @Autowired
     TaskCategoryService taskCategoryService;
 
-    @GetMapping(value = "allCategories")
     public ResponseEntity<ServiceResponse<List<GetAllCategoriesResponseDTO>>> getAllCategories() {
         return taskCategoryService.getAllCategories();
     }

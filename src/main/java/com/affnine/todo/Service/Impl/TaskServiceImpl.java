@@ -5,6 +5,7 @@ import com.affnine.todo.Enum.TaskStatus;
 import com.affnine.todo.Model.Request.CreateNewTaskRequest;
 import com.affnine.todo.Model.Request.UpdateTaskRequest;
 import com.affnine.todo.Model.Response.GetAllStatusResponseDto;
+import com.affnine.todo.Model.Response.GetAllTaskResponseDto;
 import com.affnine.todo.Model.Response.GetTaskResponseDto;
 import com.affnine.todo.Model.Task;
 import com.affnine.todo.Model.TaskCategory;
@@ -149,6 +150,26 @@ public class TaskServiceImpl implements TaskService {
             getTaskResponseDto.setMetaData(null);
             getTaskResponseDto.setCompletionTimeStamp(String.valueOf(task.getCompletionTimestamp()));
             return ResponseUtils.successResponse(AppConstants.GET_GENERIC_RESPONSE_MESSAGE_SUCCESS,getTaskResponseDto);
+        }catch (EntityNotFoundException e){
+            return ResponseUtils.internalServerError(AppConstants.INTERNAL_SERVER_ERROR_MESSAGE, null);
+        } catch (Exception e) {
+            return ResponseUtils.internalServerError(AppConstants.INTERNAL_SERVER_ERROR_MESSAGE, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<ServiceResponse<List<GetAllTaskResponseDto>>> showAllTasks(Long userId) {
+        try{
+            List<Task> tasks = taskRepository.findByUserId(userId);
+            List<GetAllTaskResponseDto> getAllTaskResponseDtoList = new ArrayList<>();
+            for (Task task : tasks){
+                GetAllTaskResponseDto getAllTaskResponseDto = new GetAllTaskResponseDto();
+                getAllTaskResponseDto.setId(task.getId());
+                getAllTaskResponseDto.setTaskName(task.getName());
+                getAllTaskResponseDto.setStatus(task.getStatus());
+                getAllTaskResponseDtoList.add(getAllTaskResponseDto);
+            }
+            return ResponseUtils.successResponse(AppConstants.GET_GENERIC_RESPONSE_MESSAGE_SUCCESS,getAllTaskResponseDtoList);
         }catch (EntityNotFoundException e){
             return ResponseUtils.internalServerError(AppConstants.INTERNAL_SERVER_ERROR_MESSAGE, null);
         } catch (Exception e) {
